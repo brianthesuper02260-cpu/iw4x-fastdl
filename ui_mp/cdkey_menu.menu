@@ -1,0 +1,141 @@
+/*********************************************************
+***************** Dumped by aerosoul94 *******************
+*********************************************************/
+
+{
+	menuDef
+	{
+		name "cdkey_menu"
+		rect -150 -84 300 84 2 2
+		popup
+		legacySplitScreenScale
+		visible 1
+		style 1
+		forecolor 1 1 1 1
+		backcolor 1 1 1 1
+		background "white"
+		focuscolor 1 1 1 1
+		fadeCycle 1
+		fadeClamp 1
+		fadeAmount 0.1
+
+		onOpen
+		{
+			setLocalVarInt "ui_centerPopup" ( 1 );
+			exec "setfromdvar ui_clantag clanName";
+			setfocus "clanEntry";
+		}
+
+		onRequestClose
+		{
+			setLocalVarInt "ui_centerPopup" ( 0 );
+		}
+
+		onEsc
+		{
+			close self;
+			open main_text;
+		}
+
+		itemDef
+		{
+			rect -854 -480 1708 960 0 0
+			decoration
+			visible 1
+			style 1
+			forecolor 1 1 1 1
+			backcolor 1 1 1 1
+			background "mw2_main_background"
+			textscale 0.55
+		}
+
+		itemDef
+		{
+			rect 0 0 300 84 0 0
+			decoration
+			visible 1
+			style 1
+            background      "white"
+            forecolor      	0.9 0.9 0.9 1
+            backcolor      	0.15 0.15 0.15 1
+            disablecolor   	0.5 0.5 0.5 0.5
+			border			1
+			bordersize		1
+			bordercolor    	0.3 0.3 0.3 1
+			textscale 0.55
+		}
+
+		itemDef
+		{
+			rect 0 0 300 24 0 0
+			decoration
+			visible 1
+			style 1
+			textfont 8
+			textStyle 8
+			textalign 5
+			textalignx -4
+			textscale 0.375
+			text "CLANTAG"
+		}
+
+		itemDef
+		{
+			name "clanEntry"
+			rect 10 32 280 20 0 0
+			visible 1
+			style 1
+			forecolor 1 1 1 1
+			backcolor 0 0 0 0.3
+			type 4
+			textfont 8
+			textalign 8
+			textStyle 8
+			textscale 0.375
+			text " "
+			dvar "clanName"
+			maxChars 4
+			maxPaintChars 4
+			visible when ( 1 )
+		}
+
+		itemDef
+		{
+			name "close"
+			rect 4 64 292 20 0 0
+			visible 1
+			group "mw2_popup_button"
+			style 1
+			forecolor 1 1 1 1
+			background "popup_button_selection_bar"
+			type 1
+			textfont 8
+			textStyle 8
+			textalign 6
+			textalignx -24
+			textscale 0.375
+			text "SAVE"
+			visible when ( 1 )
+			action
+			{
+				play "mouse_click";
+				exec "setfromdvar ui_clantag clanName";
+				close self;
+				open main_text;
+			}
+			onFocus
+			{
+				play "mouse_over";
+				if ( dvarstring( "gameMode" ) != "mp" )
+				{
+					setItemColor "mw2_popup_button" backcolor 0 0 0 0;
+				}
+				setItemColor self backcolor 0 0 0 1;
+			}
+			leaveFocus
+			{
+				setItemColor self backcolor 1 1 1 0;
+			}
+		}
+	}
+}

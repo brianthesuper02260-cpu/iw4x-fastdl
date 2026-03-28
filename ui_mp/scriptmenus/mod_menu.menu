@@ -1,0 +1,874 @@
+#include "ui/menudef.h"
+#include "ui_mp/common/redux.inc"
+
+/*
+	Todo - Improve onESC with a define instead - this is for testing purposes right now
+		- vertical
+*/
+
+#define MENU_NAME					"mod_menu"
+#define MENU_TITLE					"MENU CUPIDON"
+
+#undef MENU_NAME 	#define MENU_NAME 		"mod_menu"
+menuDef
+{
+	onEsc
+	{
+		close "mod_menu";
+		open "class";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "QUICK", close "mod_menu"; open "QUICK"; )
+	REDUX_BUTTON( 1, "GAME", close "mod_menu"; open "GAME"; )
+	REDUX_BUTTON_MOD( 2, "MODERATOR", close "mod_menu"; open "MODERATOR"; )
+	REDUX_BUTTON_ADMIN( 3, "ADMIN", close "mod_menu"; open "ADMIN"; )
+	REDUX_BUTTON( 4, "CLASS EDITOR", close "mod_menu"; open "mod_class_editor"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"QUICK"
+menuDef
+{
+	onEsc
+	{
+		close "QUICK";
+		open "mod_menu";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Reset Position", "scriptMenuResponse" reset_pos; )
+	REDUX_BUTTON_VIP( 1, "Reset Position [Enemy]", "scriptMenuResponse" reset_pos_e; )
+	REDUX_BUTTON( 2, "Unstuck [Elevator]", "scriptMenuResponse" unstuck; )
+	REDUX_BUTTON( 3, "Grab GUID", "scriptMenuResponse" guid; )
+	REDUX_BUTTON( 4, "Almost Hits", "scriptMenuResponse" almost_hits; )
+	REDUX_BUTTON( 5, "Meter Text", "scriptMenuResponse" meter_text; )
+	REDUX_BUTTON( 6, "Disable Nightvision", "scriptMenuResponse" night_vision; )
+	REDUX_BUTTON( 7, "Drop Weapon", "scriptMenuResponse" drop_canswap; )
+	REDUX_BUTTON( 8, "Full Ammo Reloads", "scriptMenuResponse" full_ammo; )
+	REDUX_BUTTON( 9, "FPS Helper", "scriptMenuResponse" fps_helper; )
+	REDUX_BUTTON( 10, "Next Page", close "QUICK"; open "QUICK_EXTRA"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"QUICK_EXTRA"
+menuDef
+{
+	onEsc
+	{
+		close "QUICK_EXTRA";
+		open "QUICK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 1, "Disable Weapon Pickups", "scriptMenuResponse" stop_pickups; )
+	REDUX_BUTTON( 2, "Always Ghillie Suit", "scriptMenuResponse" ghillie_toggle; )
+	REDUX_BUTTON( 3, "Disable Easy Elevators", "scriptMenuResponse" ez_ele_disable; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"GAME"
+menuDef
+{
+	onEsc
+	{
+		close "GAME";
+		open "mod_menu";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Binds", close "GAME"; open "BINDS"; )
+	REDUX_BUTTON( 1, "CFG List", close "GAME"; open "CFG"; )
+	REDUX_BUTTON( 2, "Killstreak", close "GAME"; open "KILLSTREAK"; )
+	REDUX_BUTTON( 3, "Perks", close "GAME"; open "PERKS"; )
+	REDUX_BUTTON_VIP( 4, "Save", close "GAME"; open "SAVE"; )
+	REDUX_BUTTON( 5, "Weapon", close "GAME"; open "WEAPON"; )
+	REDUX_BUTTON( 6, "Host Migration Settings", close "GAME"; open "AFTER_MIGRATION_MENU"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"BINDS"
+menuDef
+{
+	onEsc
+	{
+		close "BINDS";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Instant Prone Bind", "scriptMenuResponse" instant_prone_bind; )
+	REDUX_BUTTON_VIP( 1, "Mala Bind", "scriptMenuResponse" mala_bind; )
+	REDUX_BUTTON_VIP( 2, "Last Stand Bind", "scriptMenuResponse" ls_bind; )
+	REDUX_BUTTON_VIP( 3, "Sprint Bind", "scriptMenuResponse" sprint_bind; )
+	REDUX_BUTTON_VIP( 4, "Smooth Action Hands", "scriptMenuResponse" smooth_hands; )
+	REDUX_BUTTON_VIP( 5, "Smooth Action Bind", "scriptMenuResponse" smooth_bind; )
+	REDUX_BUTTON_VIP( 6, "Third Eye Bind", "scriptMenuResponse" third_eye_bind; )
+	REDUX_BUTTON_VIP( 7, "Tilt Screen Bind", "scriptMenuResponse" tilt_screen_bind; )
+	REDUX_BUTTON( 8, "Next Page", close "BINDS"; open "EXTRA_BINDS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"EXTRA_BINDS"
+menuDef
+{
+	onEsc
+	{
+		close "EXTRA_BINDS";
+		open "BINDS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Reset Spawn Bind", "scriptMenuResponse" reset_spawn_bind; )
+	REDUX_BUTTON_VIP( 1, "Reset To Enemy Spawn Bind", "scriptMenuResponse" reset_espawn_bind; )
+	REDUX_BUTTON( 2, "Unstuck Bind", "scriptMenuResponse" unstuck_bind; )
+	REDUX_BUTTON( 3, "Precise Unstuck Bind", "scriptMenuResponse" punstuck_bind; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"CFG"
+menuDef
+{
+	onEsc
+	{
+		close "CFG";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "+elevator", "scriptMenuResponse" elevator; )
+	REDUX_BUTTON( 1, "+die", "scriptMenuResponse" die; )
+	REDUX_BUTTON( 2, "+afm", "scriptMenuResponse" afm; )
+	REDUX_BUTTON( 3, "+soh", "scriptMenuResponse" soh; )
+	REDUX_BUTTON( 4, "+melee", "scriptMenuResponse" melee; )
+	REDUX_BUTTON( 5, "+as", "scriptMenuResponse" as; )
+	REDUX_BUTTON( 6, "+is", "scriptMenuResponse" is; )
+	REDUX_BUTTON( 7, "+ah", "scriptMenuResponse" ah; )
+	REDUX_BUTTON( 8, "More Player Binds", close "CFG"; open "CFG_EXT"; )
+	REDUX_BUTTON_VIP( 9, "VIP / VIP+ Binds", close "CFG"; open "VIP_CFG"; )
+	REDUX_BUTTON_MOD( 10, "Admin Binds", close "CFG"; open "MOD_CFG"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"CFG_EXT"
+menuDef
+{
+	onEsc
+	{
+		close "CFG_EXT";
+		open "CFG";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "+us", "scriptMenuResponse" us; )
+	REDUX_BUTTON( 1, "+ch", "scriptMenuResponse" ch; )
+	REDUX_BUTTON( 2, "VIP / VIP+ Binds", close "CFG_EXT"; open "VIP_CFG"; )
+	REDUX_BUTTON_MOD( 3, "Admin Binds", close "CFG_EXT"; open "MOD_CFG"; )
+	REDUX_BUTTON( 4, "Previous Page", close "CFG_EXT"; open "CFG"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"VIP_CFG"
+menuDef
+{
+	onEsc
+	{
+		close "VIP_CFG";
+		open "CFG";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "+uav", "scriptMenuResponse" uav; )
+	REDUX_BUTTON_VIP( 1, "+ks", "scriptMenuResponse" ks; )
+	REDUX_BUTTON_VIP( 2, "+ultraelevator", "scriptMenuResponse" ultraelevator; )
+	REDUX_BUTTON_VIP( 3, "+glow", "scriptMenuResponse" glow; )
+	REDUX_BUTTON_VIP( 4, "+tv", "scriptMenuResponse" tv; )
+	REDUX_BUTTON_VIP( 5, "+rh", "scriptMenuResponse" rh; )
+	REDUX_BUTTON_VIP( 6, "+ezm", "scriptMenuResponse" ezm; )
+	REDUX_BUTTON_VIP( 7, "+ezp", "scriptMenuResponse" ezp; )
+	REDUX_BUTTON_VIP( 8, "+sma", "scriptMenuResponse" sma; )
+	REDUX_BUTTON_VIP( 9, "VIP+ Core Binds", close "VIP_CFG"; open "VIP_CFG_EXT"; )
+	REDUX_BUTTON_VIP( 10, "VIP+ Map Binds", close "VIP_CFG"; open "VIP_CFG_MAPS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"VIP_CFG_EXT"
+menuDef
+{
+	onEsc
+	{
+		close "VIP_CFG_EXT";
+		open "VIP_CFG";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "+restartgame", "scriptMenuResponse" restartgame; )
+	REDUX_BUTTON_VIP( 1, "+superelevator", "scriptMenuResponse" superelevator; )
+	REDUX_BUTTON_VIP( 2, "+tpenemy", "scriptMenuResponse" tpenemy; )
+	REDUX_BUTTON_VIP( 3, "+tpsspawne", "scriptMenuResponse" tpsspawne; )
+	REDUX_BUTTON_VIP( 4, "VIP+ Map Binds", close "VIP_CFG_EXT"; open "VIP_CFG_MAPS"; )
+	REDUX_BUTTON_MOD( 5, "Admin Binds", close "VIP_CFG_EXT"; open "MOD_CFG"; )
+	REDUX_BUTTON_VIP( 6, "Previous Page", close "VIP_CFG_EXT"; open "VIP_CFG"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"VIP_CFG_MAPS"
+menuDef
+{
+	onEsc
+	{
+		close "VIP_CFG_MAPS";
+		open "VIP_CFG";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "+mp_afghan", "scriptMenuResponse" mp_afghan; )
+	REDUX_BUTTON_VIP( 1, "+mp_boneyard", "scriptMenuResponse" mp_boneyard; )
+	REDUX_BUTTON_VIP( 2, "+mp_derail", "scriptMenuResponse" mp_derail; )
+	REDUX_BUTTON_VIP( 3, "+mp_estate", "scriptMenuResponse" mp_estate; )
+	REDUX_BUTTON_VIP( 4, "+mp_favela", "scriptMenuResponse" mp_favela; )
+	REDUX_BUTTON_VIP( 5, "+mp_highrise", "scriptMenuResponse" mp_highrise; )
+	REDUX_BUTTON_VIP( 6, "+mp_invasion", "scriptMenuResponse" mp_invasion; )
+	REDUX_BUTTON_VIP( 7, "+mp_nightshift", "scriptMenuResponse" mp_nightshift; )
+	REDUX_BUTTON_VIP( 8, "Next Page", close "VIP_CFG_MAPS"; open "VIP_CFG_MAPS_EXT"; )
+	REDUX_BUTTON_VIP( 9, "VIP+ Core Binds", close "VIP_CFG_MAPS"; open "VIP_CFG_EXT"; )
+	REDUX_BUTTON_VIP( 10, "Previous Page", close "VIP_CFG_MAPS"; open "VIP_CFG"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"VIP_CFG_MAPS_EXT"
+menuDef
+{
+	onEsc
+	{
+		close "VIP_CFG_MAPS_EXT";
+		open "VIP_CFG_MAPS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "+mp_quarry", "scriptMenuResponse" mp_quarry; )
+	REDUX_BUTTON_VIP( 1, "+mp_rundown", "scriptMenuResponse" mp_rundown; )
+	REDUX_BUTTON_VIP( 2, "+mp_rust", "scriptMenuResponse" mp_rust; )
+	REDUX_BUTTON_VIP( 3, "+mp_checkpoint", "scriptMenuResponse" mp_checkpoint; )
+	REDUX_BUTTON_VIP( 4, "+mp_subbase", "scriptMenuResponse" mp_subbase; )
+	REDUX_BUTTON_VIP( 5, "+mp_terminal", "scriptMenuResponse" mp_terminal; )
+	REDUX_BUTTON_VIP( 6, "+mp_underpass", "scriptMenuResponse" mp_underpass; )
+	REDUX_BUTTON_VIP( 7, "+mp_vacant", "scriptMenuResponse" mp_vacant; )
+	REDUX_BUTTON_VIP( 8, "Previous Page", close "VIP_CFG_MAPS_EXT"; open "VIP_CFG_MAPS"; )
+	REDUX_BUTTON_VIP( 9, "VIP+ Core Binds", close "VIP_CFG_MAPS_EXT"; open "VIP_CFG_EXT"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"MOD_CFG"
+menuDef
+{
+	onEsc
+	{
+		close "MOD_CFG";
+		open "CFG";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "+sl", "scriptMenuResponse" sl; )
+	REDUX_BUTTON_MOD( 1, "+telebot", "scriptMenuResponse" telebot; )
+	REDUX_BUTTON_MOD( 2, "+botstill", "scriptMenuResponse" botstill; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"KILLSTREAK"
+menuDef
+{
+	onEsc
+	{
+		close "KILLSTREAK";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, ":carepackage:", close "KILLSTREAK"; open "AIRDROP"; )
+	REDUX_BUTTON( 1, ":ac130:", close "KILLSTREAK"; open "AC130"; )
+	REDUX_BUTTON( 2, ":predatormissile:", close "KILLSTREAK"; open "PREDATORMISSLE"; )
+	REDUX_BUTTON( 3, ":uav:", close "KILLSTREAK"; open "UAV"; )
+	REDUX_BUTTON( 4, ":sentry:", close "KILLSTREAK"; open "SENTRY"; )
+	REDUX_BUTTON( 5, ":chopper:", close "KILLSTREAK"; open "CHOPPER"; )
+	REDUX_BUTTON_VIP( 6, "Taggable Killstreak", close "KILLSTREAK"; open "TAGGABLE"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"AIRDROP"
+menuDef
+{
+	onEsc
+	{
+		close "AIRDROP";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :carepackage:", "scriptMenuResponse" airdrop; )
+	REDUX_BUTTON_VIP( 1, ":carepackage: Cancel", "scriptMenuResponse" airdrop_cancel; )
+	REDUX_BUTTON( 2, ":carepackage: Disable Pickups", "scriptMenuResponse" disable_airdrop_grab; )
+	REDUX_BUTTON_VIP( 3, ":carepackage: Toggle Save Airdrop Spot", "scriptMenuResponse" airdrop_spot; )
+	REDUX_BUTTON_VIP( 4, ":carepackage: Toggle Free Usage", "scriptMenuResponse" airdrop_usage; )
+	REDUX_BUTTON( 5, ":carepackage: Change Grab Time", "scriptMenuResponse" airdrop_grab_time; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"AC130"
+menuDef
+{
+	onEsc
+	{
+		close "AC130";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :ac130:", "scriptMenuResponse" ac130; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"PREDATORMISSLE"
+menuDef
+{
+	onEsc
+	{
+		close "PREDATORMISSLE";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :predatormissile:", "scriptMenuResponse" pred_missile; )
+	REDUX_BUTTON_VIP( 1, ":predatormissile: Cancel", "scriptMenuResponse" pred_cancel; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"UAV"
+menuDef
+{
+	onEsc
+	{
+		close "UAV";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :uav:", "scriptMenuResponse" uav; )
+	REDUX_BUTTON_VIP( 1, ":uav: Cancel", "scriptMenuResponse" uav_cancel; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"SENTRY"
+menuDef
+{
+	onEsc
+	{
+		close "SENTRY";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :sentry:", "scriptMenuResponse" sentry; )
+	REDUX_BUTTON_VIP( 1, ":sentry: Cancel", "scriptMenuResponse" sentry_cancel; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"CHOPPER"
+menuDef
+{
+	onEsc
+	{
+		close "CHOPPER";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Give :chopper:", "scriptMenuResponse" helicopter_minigun; )
+	REDUX_BUTTON_VIP( 1, ":chopper: Cancel", "scriptMenuResponse" chopper_cancel; )
+	REDUX_BUTTON_VIP( 2, ":chopper: Toggle Exit At Anytime", "scriptMenuResponse" chopper_exit; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"TAGGABLE"
+menuDef
+{
+	onEsc
+	{
+		close "TAGGABLE";
+		open "KILLSTREAK";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Save Taggable Killstreak Position", "scriptMenuResponse" tag_spot; )
+	REDUX_BUTTON_VIP( 1, "Spawn Taggable Killstreak", "scriptMenuResponse" spawn_tag; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"PERKS"
+menuDef
+{
+	onEsc
+	{
+		close "PERKS";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Fast ADS", "scriptMenuResponse" fast_ads; )
+	REDUX_BUTTON( 1, "Fast Mantle", "scriptMenuResponse" fast_mantle; )
+	REDUX_BUTTON( 2, "Fast Reloads", "scriptMenuResponse" fast_reload; )
+	REDUX_BUTTON( 3, "OMA", close "PERKS"; open "OMA"; )
+	REDUX_BUTTON_VIP( 4, "Slow Reload [Specific Weapon]", "scriptMenuResponse" slow_reload; )
+	REDUX_BUTTON( 5, "Disable Knife Lunging", "scriptMenuResponse" no_lunges; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"OMA"
+menuDef
+{
+	onEsc
+	{
+		close "OMA";
+		open "PERKS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "OMA Kit Speed", "scriptMenuResponse" kit_speed; )
+	REDUX_BUTTON_VIP( 1, "OMA Shax", "scriptMenuResponse" oma_shax; )
+	REDUX_BUTTON_VIP( 2, "OMA Cowboy", "scriptMenuResponse" oma_cowboy; )
+	REDUX_BUTTON_VIP( 3, "OMA Free Usage", "scriptMenuResponse" oma_free_usage; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"SAVE"
+menuDef
+{
+	onEsc
+	{
+		close "SAVE";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Save Settings File", play "consider_prestige"; close "SAVE"; open "CONFIRM"; )
+	REDUX_BUTTON_VIP( 1, "Load Settings File", play "consider_prestige"; close "SAVE"; open "CONFIRM_LOAD"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"WEAPON"
+menuDef
+{
+	onEsc
+	{
+		close "WEAPON";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Afterhits", close "WEAPON"; open "Afterhits"; )
+	REDUX_BUTTON( 1, "Animations", close "WEAPON"; open "Animations"; )
+	REDUX_BUTTON( 2, "Altswaps", close "WEAPON"; open "Altswaps"; )
+	REDUX_BUTTON( 3, "Ammo", close "WEAPON"; open "Ammo"; )
+	REDUX_BUTTON( 4, "Canswaps", close "WEAPON"; open "Canswaps"; )
+	REDUX_BUTTON_VIP( 5, "Cockbacks", close "WEAPON"; open "Cockbacks"; )
+	REDUX_BUTTON( 6, "Equipment", close "WEAPON"; open "Equipment"; )
+	REDUX_BUTTON( 7, "Instashoots", close "WEAPON"; open "Instashoots"; )
+	REDUX_BUTTON( 8, "Glitches", close "WEAPON"; open "Glitches"; )
+	REDUX_BUTTON_VIP( 9, "Swapping", close "WEAPON"; open "Swapping"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Afterhits"
+menuDef
+{
+	onEsc
+	{
+		close "Afterhits";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Afterhits Type", "scriptMenuResponse" ah_type; )
+	REDUX_BUTTON( 1, "Afterhits Weapon", "scriptMenuResponse" ah_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Animations"
+menuDef
+{
+	onEsc
+	{
+		close "Animations";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Knife Lunge Animation", "scriptMenuResponse" lunge_anim; )
+	REDUX_BUTTON( 1, "JNACS", close "Animations"; open "JNAC"; )
+	REDUX_BUTTON_VIP( 2, "Luigi Lock", close "Animations"; open "LUIGI"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"JNAC"
+menuDef
+{
+	onEsc
+	{
+		close "JNAC";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "JNAC Type", "scriptMenuResponse" jnac_type; )
+	REDUX_BUTTON( 1, "JNAC Weapon", "scriptMenuResponse" jnac_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"LUIGI"
+menuDef
+{
+	onEsc
+	{
+		close "LUIGI";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Luigi Lock Type", "scriptMenuResponse" luigi_type; )
+	REDUX_BUTTON_VIP( 1, "Luigi Weapon", "scriptMenuResponse" luigi_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Altswaps"
+menuDef
+{
+	onEsc
+	{
+		close "Altswaps";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Altswap Camos", "scriptMenuResponse" alt_camo; )
+	REDUX_BUTTON( 1, "Altswap Type", "scriptMenuResponse" alt_type; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Ammo"
+menuDef
+{
+	onEsc
+	{
+		close "Ammo";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Custom Clip", close "Ammo"; open "Custom"; )
+	REDUX_BUTTON( 1, "Empty Clip", close "Ammo"; open "Empty"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Custom"
+menuDef
+{
+	onEsc
+	{
+		close "Custom";
+		open "Ammo";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Custom Clip Type", "scriptMenuResponse" clip_type; )
+	REDUX_BUTTON( 1, "Add Custom Clip Amount", "scriptMenuResponse" clip_amount; )
+	REDUX_BUTTON( 2, "Subtract Custom Clip Amount", "scriptMenuResponse" clip_amount_sub; )
+	REDUX_BUTTON( 3, "Custom Clip On Weapon Fire", "scriptMenuResponse" clip_fire; )
+	REDUX_BUTTON( 4, "Custom Clip Weapon", "scriptMenuResponse" clip_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Empty"
+menuDef
+{
+	onEsc
+	{
+		close "Empty";
+		open "Ammo";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Empty Clip Type", "scriptMenuResponse" empty_type; )
+	REDUX_BUTTON( 1, "Empty Clip On Weapon Fire", "scriptMenuResponse" empty_fire; )
+	REDUX_BUTTON( 2, "Empty Clip Weapon", "scriptMenuResponse" empty_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Canswaps"
+menuDef
+{
+	onEsc
+	{
+		close "Canswaps";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Canswap Weapon", "scriptMenuResponse" canswap_weapon; )
+	REDUX_BUTTON_VIP( 1, "Canzooms", "scriptMenuResponse" canzooms; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Cockbacks"
+menuDef
+{
+	onEsc
+	{
+		close "Cockbacks";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Disable Cockbacks Type", "scriptMenuResponse" disable_type; )
+	REDUX_BUTTON_VIP( 1, "Disable Cockbacks Weapon", "scriptMenuResponse" disable_weapon; )
+	REDUX_BUTTON_VIP( 2, "Force Cockbacks Type", "scriptMenuResponse" force_type; )
+	REDUX_BUTTON_VIP( 3, "Force Cockbacks Weapon", "scriptMenuResponse" force_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Equipment"
+menuDef
+{
+	onEsc
+	{
+		close "Equipment";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Glowstick", "scriptMenuResponse" glowstick; )
+	REDUX_BUTTON( 1, "Righthand TK", "scriptMenuResponse" righthand; )
+	REDUX_BUTTON( 2, "Disable Equipment", "scriptMenuResponse" disableeq; )
+	REDUX_BUTTON_VIP( 3, "BO2 Instaswap Type [{+frag}][{+smoke}]", "scriptMenuResponse" bo2_instaswap; )
+	REDUX_BUTTON_VIP( 4, "Instant Equipment", "scriptMenuResponse" instant_eq; )
+	REDUX_BUTTON_VIP( 5, "PS3 Bypass Mechanic", "scriptMenuResponse" bypass; )
+	REDUX_BUTTON_VIP( 6, "Non-Lethal Equipment Type", "scriptMenuResponse" lethals_eq_select; )
+	REDUX_BUTTON_VIP( 7, "Replace Non-Lethals With Lethals", "scriptMenuResponse" lethals_replace; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Instashoots"
+menuDef
+{
+	onEsc
+	{
+		close "Instashoots";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Instashoots Type", "scriptMenuResponse" instashoots_type; )
+	REDUX_BUTTON( 1, "Instashoots Weapon", "scriptMenuResponse" instashoots_weapon; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Glitches"
+menuDef
+{
+	onEsc
+	{
+		close "Glitches";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON( 0, "Rapid Fire Glitch [Requires :m203:]", "scriptMenuResponse" rapid_fire; )
+	REDUX_BUTTON_VIP( 1, "Gunlocks Glitch [{+melee}]", "scriptMenuResponse" gunlocks; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"Swapping"
+menuDef
+{
+	onEsc
+	{
+		close "Swapping";
+		open "WEAPON";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Auto Tac/Gun Flips", "scriptMenuResponse" gun_flips; )
+	REDUX_BUTTON_VIP( 1, "Auto Righty Tighty", "scriptMenuResponse" auto_rt; )
+	REDUX_BUTTON_VIP( 2, "Auto Sprint On CC/OMA", "scriptMenuResponse" auto_soma; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"AFTER_MIGRATION_MENU"
+menuDef
+{
+	onEsc
+	{
+		close "AFTER_MIGRATION_MENU";
+		open "GAME";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "Force Cockback After Migration", "scriptMenuResponse" host_migration_cockbacks; )
+	REDUX_BUTTON( 1, "Force Canswap After Migration", "scriptMenuResponse" host_migration_canswap; )
+	REDUX_BUTTON_VIP( 2, "Force Mala After Migration", "scriptMenuResponse" host_migration_mala; )
+	REDUX_BUTTON_VIP( 3, "Force Fake Lunge After Migration", "scriptMenuResponse" host_migration_fake_lunges; )
+	REDUX_BUTTON_VIP( 4, "Force Last Stand After Migration", "scriptMenuResponse" host_migration_last_stand; )
+	REDUX_BUTTON_VIP( 5, "Force Sprint Anim After Migration", "scriptMenuResponse" host_migration_sprint; )
+	REDUX_BUTTON( 6, "Force Instant Prone After Migration", "scriptMenuResponse" host_migration_instant_prone; )
+	REDUX_BUTTON( 7, "Keep Velocity After Migration", "scriptMenuResponse" host_migration_velocity; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"MODERATOR"
+menuDef
+{
+	onEsc
+	{
+		close "MODERATOR";
+		open "mod_menu";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "Delete All Killstreaks", "scriptMenuResponse" delete_ks; )
+	REDUX_BUTTON_MOD( 1, "Delete All Weapons On Ground", "scriptMenuResponse" delete_weapons; )
+	REDUX_BUTTON_MOD( 2, "Map Change", close "MODERATOR"; open "MOD_MAPS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"MOD_MAPS"
+menuDef
+{
+	onEsc
+	{
+		close "MOD_MAPS";
+		open "MODERATOR";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "Normal", close "MOD_MAPS"; open "NORMAL_MAPS"; )
+	REDUX_BUTTON_MOD( 1, "DLC", close "MOD_MAPS"; open "DLC_MAPS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"NORMAL_MAPS"
+menuDef
+{
+	onEsc
+	{
+		close "NORMAL_MAPS";
+		open "MOD_MAPS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "Afghan", "scriptMenuResponse" afghan; )
+	REDUX_BUTTON_MOD( 1, "Derail", "scriptMenuResponse" derail; )
+	REDUX_BUTTON_MOD( 2, "Estate", "scriptMenuResponse" estate; )
+	REDUX_BUTTON_MOD( 3, "Favela", "scriptMenuResponse" favela; )
+	REDUX_BUTTON_MOD( 4, "Highrise", "scriptMenuResponse" highrise; )
+	REDUX_BUTTON_MOD( 5, "Invasion", "scriptMenuResponse" invasion; )
+	REDUX_BUTTON_MOD( 6, "Karachi", "scriptMenuResponse" checkpoint; )
+	REDUX_BUTTON_MOD( 7, "Quarry", "scriptMenuResponse" quarry; )
+	REDUX_BUTTON_MOD( 8, "Rundown", "scriptMenuResponse" rundown; )
+	REDUX_BUTTON_MOD( 9, "Rust", "scriptMenuResponse" rust; )
+	REDUX_BUTTON_MOD( 10, "Next Page", close "NORMAL_MAPS"; open "MORE_MAPS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"MORE_MAPS"
+menuDef
+{
+	onEsc
+	{
+		close "MORE_MAPS";
+		open "NORMAL_MAPS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "Scrapyard", "scriptMenuResponse" boneyard; )
+	REDUX_BUTTON_MOD( 1, "Skidrow", "scriptMenuResponse" nightshift; )
+	REDUX_BUTTON_MOD( 2, "Sub Base", "scriptMenuResponse" subbase; )
+	REDUX_BUTTON_MOD( 3, "Terminal", "scriptMenuResponse" terminal; )
+	REDUX_BUTTON_MOD( 4, "Underpass", "scriptMenuResponse" underpass; )
+	REDUX_BUTTON_MOD( 5, "Wasteland", "scriptMenuResponse" brecourt; )
+	REDUX_BUTTON_MOD( 6, "Previous Page", close "MORE_MAPS"; open "NORMAL_MAPS"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"DLC_MAPS"
+menuDef
+{
+	onEsc
+	{
+		close "DLC_MAPS";
+		open "MOD_MAPS";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_MOD( 0, "Bailout", "scriptMenuResponse" complex; )
+	REDUX_BUTTON_MOD( 1, "Carnival", "scriptMenuResponse" abandon; )
+	REDUX_BUTTON_MOD( 2, "Crash", "scriptMenuResponse" crash; )
+	REDUX_BUTTON_MOD( 3, "Fuel", "scriptMenuResponse" fuel2; )
+	REDUX_BUTTON_MOD( 4, "Overgrown", "scriptMenuResponse" overgrown; )
+	REDUX_BUTTON_MOD( 5, "Salvage", "scriptMenuResponse" compact; )
+	REDUX_BUTTON_MOD( 6, "Storm", "scriptMenuResponse" storm; )
+	REDUX_BUTTON_MOD( 7, "Strike", "scriptMenuResponse" strike; )
+	REDUX_BUTTON_MOD( 8, "Trailer Park", "scriptMenuResponse" trailerpark; )
+	REDUX_BUTTON_MOD( 9, "Vacant", "scriptMenuResponse" vacant; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"ADMIN"
+menuDef
+{
+	onEsc
+	{
+		close "ADMIN";
+		open "mod_menu";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_ADMIN( 0, "Teleport Bot To Crosshairs", "scriptMenuResponse" tele_bot; )
+	REDUX_BUTTON_ADMIN( 1, "Spawn 1 Bot [Emergency]", "scriptMenuResponse" spawn_client; )
+	REDUX_SLIDER( 2, "LOBBY SIZE", "sv_maxclients", 1, 18, 18, ;, 1 )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"CONFIRM"
+menuDef
+{
+
+	onEsc
+	{
+		close "CONFIRM";
+		play "exit_prestige";
+		open "SAVE";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "ARE YOU SURE?", ; )
+	REDUX_BUTTON_VIP( 1, "Yes - Save My Settings", play "enter_prestige"; "scriptMenuResponse" confirm_save; close "CONFIRM"; open "SAVE"; )
+	REDUX_BUTTON_VIP( 2, "No - Do Not Save My Settings", play "exit_prestige"; close "CONFIRM"; open "SAVE"; )
+}
+
+#undef MENU_NAME 	#define MENU_NAME 		"CONFIRM_LOAD"
+menuDef
+{
+
+	onEsc
+	{
+		close "CONFIRM_LOAD";
+		play "exit_prestige";
+		open "SAVE";
+	}
+
+	REDUX_INGAME_MENU( false )
+
+	REDUX_BUTTON_VIP( 0, "ARE YOU SURE?", ; )
+	REDUX_BUTTON_VIP( 1, "Yes - Load My Save", play "enter_prestige"; "scriptMenuResponse" confirm_load; close "CONFIRM_LOAD"; open "SAVE"; )
+	REDUX_BUTTON_VIP( 2, "No - Do Not Load My Save", play "exit_prestige"; close "CONFIRM_LOAD"; open "SAVE"; )
+}

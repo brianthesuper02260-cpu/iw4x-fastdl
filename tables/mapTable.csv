@@ -1,0 +1,45 @@
+#a0 map name,#b1 preview material,#c3 localised name
+mp_afghan,preview_mp_afghan,Afghan
+mp_derail,preview_mp_derail,Derail
+mp_estate,preview_mp_estate,Estate
+mp_favela,preview_mp_favela,Favela
+mp_highrise,preview_mp_highrise,Highrise
+mp_invasion,preview_mp_invasion,Invasion
+mp_checkpoint,preview_mp_checkpoint,Karachi
+mp_quarry,preview_mp_quarry,Quarry
+mp_rundown,preview_mp_rundown,Rundown
+mp_rust,preview_mp_rust,Rust
+mp_boneyard,preview_mp_boneyard,Scrapyard
+mp_nightshift,preview_mp_nightshift,Skidrow
+mp_subbase,preview_mp_subbase,Sub Base
+mp_terminal,preview_mp_terminal,Terminal
+mp_underpass,preview_mp_underpass,Underpass
+mp_brecourt,preview_mp_brecourt,Wasteland
+mp_complex,preview_mp_complex,Bailout
+mp_crash,preview_mp_crash,Crash
+mp_overgrown,preview_mp_overgrown,Overgrown
+mp_compact,preview_mp_compact,Salvage
+mp_storm,preview_mp_storm,Storm
+mp_abandon,preview_mp_abandon,Carnival
+mp_fuel2,preview_mp_fuel2,Fuel
+mp_strike,preview_mp_strike,Strike
+mp_trailerpark,preview_mp_trailerpark,Trailer Park
+mp_vacant,preview_mp_vacant,Vacant
+mp_nuked,preview_mp_nuked,Nuketown
+mp_cross_fire,preview_mp_cross_fire,Crossfire
+mp_bloc,preview_mp_bloc,Bloc
+mp_cargoship,preview_mp_cargoship,Wet Work
+mp_killhouse,preview_mp_killhouse,Killhouse
+mp_bog_sh,preview_mp_bog_sh,Bog
+mp_cargoship_sh,preview_mp_cargoship_sh,Freighter
+mp_shipment,preview_mp_shipment,Shipment
+mp_shipment_long,preview_mp_shipment_long,Shipment: Long
+mp_rust_long,preview_mp_rust_long,Rust: Long
+mp_firingrange,preview_mp_firingrange,Firing Range
+mp_storm_spring,preview_mp_storm_spring,Chemical Plant
+mp_fav_tropical,preview_mp_fav_tropical,Favela: Tropical
+mp_estate_tropical,preview_mp_estate_tropical,Estate: Tropical
+mp_crash_tropical,preview_mp_crash_tropical,Crash: Tropical
+mp_bloc_sh,preview_mp_bloc_sh,Forgotten City
+oilrig,preview_oilrig,Oilrig
+mp_custom_map_name,preview_custom_map,Custom Map Name Here
