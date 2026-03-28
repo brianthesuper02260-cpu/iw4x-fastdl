@@ -1,0 +1,137 @@
+#include "ui/menudef.h"
+#include "ui_mp/common/redux.inc"
+
+#define MENU_NAME					"map_vote"
+
+menudef
+{
+	name 							MENU_NAME
+	rect 							0 0 640 480 4 4
+	forecolor 						1 1 1 1
+	blurWorld						7
+	onOpen
+	{
+		setlocalVarInt "map_vote_id" -1;
+		play "PG_1mc_control_taken";
+		exec "-scores";
+	}
+	onEsc
+	{
+		open "popup_leavegame";
+	}
+
+	#define CARD_WIDTH					175.5
+	#define CARD_HEIGHT					98.71875
+	#define CARD_ROW( idx )				( ( idx - 0 ) % 3 )
+	#define CARD_COL( idx )				( ( idx - 0 - ( ( idx - 0 ) % 3 ) ) / 3 )
+
+	#define CARD_X( idx ) 				( 0 + ( CARD_WIDTH + 5 ) * CARD_COL( idx ) )
+	#define CARD_Y( idx ) 				( 55 + ( CARD_HEIGHT + 5 ) * CARD_ROW( idx ) )
+	#define CARD_ORIGIN( idx )			CARD_X( idx ) CARD_Y( idx )
+	#define CARD_RECT( idx )			CARD_ORIGIN( idx ) CARD_WIDTH CARD_HEIGHT 1 1
+
+	#define MAP_VOTE_CARD( idx, int_fix ) \
+			CREATE_SHADER( CARD_RECT( idx ), "white", 0 0 0 1 ) \
+			CREATE_SHADER( CARD_RECT( idx ), tableLookup( "tables/mapTable.csv", 0, dvarString( "map_vote_id_" + idx ), 1 ), 1 1 1 0.65 ) \
+			CREATE_SHADER( CARD_RECT( idx ), "gradient_bottom", 0 0 0 0.35 ) \
+			itemDef \
+			{ \
+				rect 						CARD_RECT( idx ) \
+				forecolor 					1 1 1 0 \
+				border						1 \
+				bordersize					1 \
+				bordercolor					0.3 0.3 0.3 1 \
+				exp 						material ( "white" ) \
+				style 						3 \
+				type						1 \
+				visible 					1 \
+				onFocus \
+				{ \
+					play 					"mouse_over"; \
+					setItemColor 			self forecolor 1 0 0 0.24 \
+				} \
+				leaveFocus \
+				{ \
+					setItemColor 			self forecolor 1 0 0 0 \
+				} \
+				action \
+				{ \
+					play 					"mouse_click"; \
+					setlocalVarInt			"map_vote_id" idx; \
+					scriptMenuResponse		"cast_vote:" int_fix; \
+				} \
+			} \
+			CREATE_SHADER_EX( CARD_RECT( idx ), "white", 1 1 1 0.1, localVarInt( "map_vote_id_" ) == idx, border 0; bordersize 0.5; bordercolor 1 0.823 0 1 ) \
+			CREATE_TEXT( CARD_RECT( idx ), tableLookup( "tables/mapTable.csv", 0, dvarString( "map_vote_id_" + idx ), 2 ), 1 1 1 1, 1, textstyle 3; textscale 0.375; textalign 12; origin 5 -15 ) \
+			CREATE_TEXT( CARD_RECT( idx ), dvarString( "map_vote_count_" + idx ) + " vote", 1 1 1 0.5, dvarInt( "map_vote_count_" + idx ) == 1, textstyle 3; textscale 0.275; textalign 12; origin 5 -4.5 ) \
+			CREATE_TEXT( CARD_RECT( idx ), dvarString( "map_vote_count_" + idx ) + " votes", 1 1 1 0.5, dvarInt( "map_vote_count_" + idx ) != 1, textstyle 3; textscale 0.275; textalign 12; origin 5 -4.5 )
+
+	#define MAP_VOTE_RANDOM_CARD( idx, int_fix ) \
+			CREATE_SHADER( CARD_RECT( idx ), "preview_mp_random", 1 1 1 0.65 ) \
+			itemDef \
+			{ \
+				rect                        CARD_RECT( idx ) \
+				forecolor                   1 1 1 0 \
+				border                      1 \
+				bordersize                  1 \
+				bordercolor                 0.3 0.3 0.3 1 \
+				exp                         material ( "white" ) \
+				style                       3 \
+				type                        1 \
+				visible                     1 \
+				onFocus \
+				{ \
+					play                    "mouse_over"; \
+					setItemColor             self forecolor 1 0 0 0.24 \
+				} \
+				leaveFocus \
+				{ \
+					setItemColor             self forecolor 1 0 0 0 \
+				} \
+				action \
+				{ \
+					play                    "mouse_click"; \
+					setlocalVarInt          "map_vote_id" idx; \
+					scriptMenuResponse      "cast_vote:" int_fix; \
+				} \
+			} \
+			CREATE_SHADER_EX( CARD_RECT( idx ), "white", 1 1 1 0.1, localVarInt( "map_vote_id_" ) == idx, border 0; bordersize 0.5; bordercolor 1 0.823 0 1 ) \
+			CREATE_TEXT( CARD_RECT( idx ), "Random Map", 1 1 1 1, 1, textstyle 3; textscale 0.375; textalign 12; origin 5 -15 ) \
+			CREATE_TEXT( CARD_RECT( idx ), dvarString( "map_vote_count_" + idx ) + " vote", 1 1 1 0.5, dvarInt( "map_vote_count_" + idx ) == 1, textstyle 3; textscale 0.275; textalign 12; origin 5 -4.5 ) \
+			CREATE_TEXT( CARD_RECT( idx ), dvarString( "map_vote_count_" + idx ) + " votes", 1 1 1 0.5, dvarInt( "map_vote_count_" + idx ) != 1, textstyle 3; textscale 0.275; textalign 12; origin 5 -4.5 )
+
+	#define MINI_GLOW_UTIL \
+		itemDef { name"glowing_util" rect 0 0 640 480 4 4; style 3; decoration; visible 1; foreColor 1 0 0 0; background "mockup_bg_glow"; textscale 0.55; exp foreColor a (((sin(milliseconds() / 1500) + 1) * 0.25) + 0.25) }
+
+	MINI_GLOW_UTIL
+	MAP_VOTE_CARD( 0, "0" )
+	MAP_VOTE_CARD( 1, "1" )
+	MAP_VOTE_CARD( 2, "2" )
+	MAP_VOTE_RANDOM_CARD( 4, "4" )
+
+	itemDef
+	{
+		rect 130 95 272 28 0 0
+		style 0
+		border 0
+		ownerdraw 0
+		ownerdrawFlag 0
+		borderSize 0
+		foreColor 1 1 1 1
+		backColor 0 0 0 0
+		borderColor 0 0 0 0
+		outlineColor 0 0 0 0
+		decoration
+		type 0
+		align 0
+		textAlign 0
+		textAlignX 200
+		textAlignY 150
+		textScale 0.5
+		textStyle 3
+		textFont 9
+		feeder 0
+		visible 1
+		exp text (dvarString(timer_text))
+	}
+}
